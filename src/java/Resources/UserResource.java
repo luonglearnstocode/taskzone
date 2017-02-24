@@ -17,11 +17,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,10 +38,13 @@ import org.hibernate.SessionFactory;
  * @author lwown
  */
 @Path("users")
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
     @GET
     @Produces(MediaType.APPLICATION_XML)
+//    @Produces(MediaType.APPLICATION_JSON)
     public List<User> getUsers() {
         Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
         session.beginTransaction();
@@ -70,6 +79,11 @@ public class UserResource {
         Query q = session.createQuery("from User where userName = '" + username + "'");
         User user = (User) q.uniqueResult();
         
+        // can build a response and parse it to the exception
+        if (user == null) {
+//            throw new WebApplicationException(Status.NOT_FOUND);
+            throw new NotFoundException();
+        }
         session.getTransaction().commit();
         return user;
     }
@@ -148,6 +162,12 @@ public class UserResource {
         u1.getTasks().add(t1);
         u1.getTasks().add(t2);
         u2.getTasks().add(t3);
+        t1.setUser(u1);
+        t2.setUser(u1);
+        t3.setUser(u2);
+//        t1.assignTask(u1);
+//        t2.assignTask(u1);
+//        t3.assignTask(u2);
         
         session.saveOrUpdate(t1);
         session.saveOrUpdate(t2);
