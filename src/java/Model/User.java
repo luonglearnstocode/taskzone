@@ -31,6 +31,7 @@ public class User implements Serializable {
     private String userName;
     private String fullName;
     private String password;
+    private boolean isManager;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
     
@@ -39,6 +40,7 @@ public class User implements Serializable {
     public User(String userName) {
         this.userName = userName;
         this.fullName = userName;
+        this.isManager = false;
         password = "qwerty";
     }
     
@@ -80,5 +82,12 @@ public class User implements Serializable {
         this.tasks = tasks;
     }
     
+    public boolean isIsManager() {
+        return isManager;
+    }
+
+    public void setIsManager(boolean isManager) {
+        this.isManager = isManager;
+    }
     
 }

@@ -17,6 +17,7 @@ public class HibernateStuff {
 
         config.addAnnotatedClass(Model.Task.class);
         config.addAnnotatedClass(Model.User.class);
+        config.addAnnotatedClass(Model.Feedback.class);
 
         config = config.configure();
         

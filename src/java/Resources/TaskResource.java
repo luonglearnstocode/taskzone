@@ -5,6 +5,7 @@
  */
 package Resources;
 
+import Model.Feedback;
 import Model.Task;
 import Util.HibernateStuff;
 import java.text.ParseException;
@@ -75,6 +76,21 @@ public class TaskResource {
         return task;
     }
     
+    @Path("/{taskid}/feedback")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Feedback getFeedback(@PathParam("taskid") long id) {
+        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Query q = session.createQuery("from Task where Id = " + id);
+        Task task = (Task) q.uniqueResult();
+        Feedback fb = task.getFeedback();
+        
+        session.getTransaction().commit();
+        return fb;
+    }
+    
     @Path("/{taskid}")
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
@@ -86,7 +102,7 @@ public class TaskResource {
         Query q = session.createQuery("from Task where Id = " + id);
         Task task = (Task) q.uniqueResult();
         task.setDueDate(newTask.getDueDate());
-        task.setIsDone(newTask.getIsDone());
+        task.setIsDone(newTask.isIsDone());
         task.setText(newTask.getText());
         session.saveOrUpdate(task);
         

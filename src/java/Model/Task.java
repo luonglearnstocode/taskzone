@@ -9,11 +9,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlElement;
@@ -32,7 +35,7 @@ public class Task implements Serializable {
     @GeneratedValue
     private Long id; 
     private String text;
-    private Boolean isDone;
+    private boolean isDone;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)
@@ -40,6 +43,8 @@ public class Task implements Serializable {
     @ManyToOne
     @JoinColumn(name="USERNAME")
     private User user;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Feedback feedback;
 //    private Map<Long, Comment> comments = new HashMap<>();
     
     public Task() {}
@@ -50,6 +55,7 @@ public class Task implements Serializable {
         this.created = new Date();
         this.dueDate = dueDate;
         user = null;
+        feedback = new Feedback("N/A");
     }
     
     @XmlElement
@@ -62,14 +68,14 @@ public class Task implements Serializable {
     }
     
     @XmlElement
-    public Boolean getIsDone() {
+    public boolean isIsDone() {
         return isDone;
     }
 
-    public void setIsDone(Boolean isDone) {
+    public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
-    
+       
     @XmlElement
     public Date getDueDate() {
         return dueDate;
@@ -108,7 +114,7 @@ public class Task implements Serializable {
     public User getUser() {
         return user;
     }
-
+    
     public void setUser(User user) {
         this.user = user;
     }
@@ -116,6 +122,14 @@ public class Task implements Serializable {
     public void assignTask(User user) {
         this.user = user;
         this.user.getTasks().add(this);
+    }
+    
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
     }
       
 }

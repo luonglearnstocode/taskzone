@@ -5,6 +5,7 @@
  */
 package Resources;
 
+import Model.Feedback;
 import Model.Task;
 import Model.User;
 import Util.HibernateStuff;
@@ -159,6 +160,10 @@ public class UserResource {
         Task t2 = new Task("task 2", date2);
         Task t3 = new Task("task 3", date2);
         
+        Feedback f1 = new Feedback("first feedback");
+        f1.setIsApproved(true);
+        t1.setFeedback(f1);
+        
         u1.getTasks().add(t1);
         u1.getTasks().add(t2);
         u2.getTasks().add(t3);
@@ -169,6 +174,7 @@ public class UserResource {
 //        t2.assignTask(u1);
 //        t3.assignTask(u2);
         
+        session.saveOrUpdate(f1);
         session.saveOrUpdate(t1);
         session.saveOrUpdate(t2);
         session.saveOrUpdate(t3);
