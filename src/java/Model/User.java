@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -32,7 +34,7 @@ public class User implements Serializable {
     private String fullName;
     private String password;
     private boolean isManager;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
     
     public User() {}
@@ -71,9 +73,9 @@ public class User implements Serializable {
         this.password = password;
     }
     
-    @XmlElementWrapper
-    @XmlElement(name="task")
-//    @XmlTransient
+//    @XmlElementWrapper
+//    @XmlElement(name="task")
+    @XmlTransient
     public List<Task> getTasks() {
         return tasks;
     }
