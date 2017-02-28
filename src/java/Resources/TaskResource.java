@@ -5,6 +5,7 @@
  */
 package Resources;
 
+import Dao.TaskDAO;
 import Model.Feedback;
 import Model.Task;
 import Util.HibernateStuff;
@@ -22,6 +23,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -33,47 +35,51 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author lwown
  */
-@Path("tasks")
+@Path("/")
 public class TaskResource {
     
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public List<Task> getTasks() {
-        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-        session.beginTransaction();
-
-        Query q = session.createQuery("from Task");
-        List<Task> tasks = q.list();
-        
-        session.getTransaction().commit();
+    public List<Task> getTasks(@PathParam("username") String username) {      
+        TaskDAO dao = new TaskDAO();
+        List tasks = dao.getTasks(username);
         return tasks;
     }
     
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
-    public Task postTask(Task newTask) {
-        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-        session.beginTransaction();
-        
-        session.save(newTask);
-        
-        session.getTransaction().commit();
-        return newTask;
+    public Response addTask(@PathParam("username") String username, Task newTask) {
+        TaskDAO dao = new TaskDAO();
+        dao.addTask(username, newTask);
+        return Response.ok().build();
     }
     
     @Path("/{taskid}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public Task getTaskWithId(@PathParam("taskid") long id) {
-        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-        session.beginTransaction();
-        
-        Query q = session.createQuery("from Task where Id = " + id);
-        Task task = (Task) q.uniqueResult();
-        
-        session.getTransaction().commit();
+        TaskDAO dao = new TaskDAO();
+        Task task = dao.getTaskWithId(id);
         return task;
+    }
+    
+    @Path("/{taskid}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_XML)
+    public Task updateTaskWithId(Task newTask, @PathParam("taskid") long id) {
+        TaskDAO dao = new TaskDAO();
+        Task task = dao.updateTask(newTask, id);
+        return task;
+    }
+    
+    @Path("/{taskid}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_XML)
+    public Response deleteTask(@PathParam("username") String username, @PathParam("taskid") int id) {
+        TaskDAO dao = new TaskDAO();
+        if (dao.deleteTask(username, id)) return Response.ok().build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
     
     @Path("/{taskid}/feedback")
@@ -90,65 +96,30 @@ public class TaskResource {
         session.getTransaction().commit();
         return fb;
     }
-    
-    @Path("/{taskid}")
-    @PUT
-    @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
-    public Task updateTaskWithId(Task newTask, @PathParam("taskid") long id) {
-        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-        session.beginTransaction();
-        
-        Query q = session.createQuery("from Task where Id = " + id);
-        Task task = (Task) q.uniqueResult();
-        task.setDueDate(newTask.getDueDate());
-        task.setIsDone(newTask.isIsDone());
-        task.setText(newTask.getText());
-        session.saveOrUpdate(task);
-        
-        session.getTransaction().commit();
-        return task;
-    }
-    
-    @Path("/{taskid}")
-    @DELETE
-    @Produces(MediaType.APPLICATION_XML)
-    public Task deleteTask(@PathParam("taskid") int id) {
-        System.out.println("deleteTask()");
-        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-        session.beginTransaction();
-        
-        Query q = session.createQuery("from Task where id = " + id);
-        Task task = (Task) q.uniqueResult();
-        System.out.println(task);
-        session.delete(task);
-        session.getTransaction().commit();
-        return task;
-    }
 
-    @Path("/populate")
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String populate() throws ParseException {
-        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
-        
-        Session session = sf.openSession();
-        session.beginTransaction();
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = sdf.parse("2017-12-31");
-        Date date2 = sdf.parse("2017-04-30");
-        
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("task 1", date1));
-        tasks.add(new Task("task 2", date2));
-        
-        tasks.forEach((task) -> {
-            session.saveOrUpdate(task);
-        });
-        
-        session.getTransaction().commit();
-        
-        return "Done";
-    }
+//    @Path("/populate")
+//    @GET
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public String populate() throws ParseException {
+//        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+//        
+//        Session session = sf.openSession();
+//        session.beginTransaction();
+//        
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date1 = sdf.parse("2017-12-31");
+//        Date date2 = sdf.parse("2017-04-30");
+//        
+//        ArrayList<Task> tasks = new ArrayList<>();
+//        tasks.add(new Task("task 1", date1));
+//        tasks.add(new Task("task 2", date2));
+//        
+//        tasks.forEach((task) -> {
+//            session.saveOrUpdate(task);
+//        });
+//        
+//        session.getTransaction().commit();
+//        
+//        return "Done";
+//    }
 }

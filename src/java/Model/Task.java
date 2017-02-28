@@ -47,7 +47,9 @@ public class Task implements Serializable {
     private Feedback feedback;
 //    private Map<Long, Comment> comments = new HashMap<>();
     
-    public Task() {}
+    public Task() {
+        this("NA", new Date());
+    }
 
     public Task(String text, Date dueDate) {
         isDone = false;

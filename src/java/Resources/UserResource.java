@@ -43,8 +43,6 @@ import org.hibernate.SessionFactory;
 //@Consumes(MediaType.APPLICATION_JSON)
 //@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
-
-    
     @GET
     @Produces(MediaType.APPLICATION_XML)
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -107,6 +105,13 @@ public class UserResource {
         session.getTransaction().commit();
         return user;
     }
+    
+    @Path("/{username}/tasks")
+    public TaskResource getCommentResource() {
+        return new TaskResource();
+    }
+
+    
     
 //    @GET
 //    @Produces(MediaType.APPLICATION_XML)
@@ -240,6 +245,7 @@ public class UserResource {
         t1.setUser(u1);
         t2.setUser(u1);
         t3.setUser(u2);
+        u3.setIsManager(true);
 //        t1.assignTask(u1);
 //        t2.assignTask(u1);
 //        t3.assignTask(u2);
