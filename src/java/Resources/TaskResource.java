@@ -46,6 +46,24 @@ public class TaskResource {
         return tasks;
     }
     
+    @Path("/finished")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Task> getFinishedTasks(@PathParam("username") String username) {      
+        TaskDAO dao = new TaskDAO();
+        List tasks = dao.getFinishedTask(username);
+        return tasks;
+    }
+    
+    @Path("/unfinished")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Task> getUnfinishedTasks(@PathParam("username") String username) {      
+        TaskDAO dao = new TaskDAO();
+        List tasks = dao.getUnfinishedTask(username);
+        return tasks;
+    }
+    
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     public Response addTask(@PathParam("username") String username, Task newTask) {
@@ -82,19 +100,24 @@ public class TaskResource {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
     
+//    @Path("/{taskid}/feedback")
+//    @GET
+//    @Produces(MediaType.APPLICATION_XML)
+//    public Feedback getFeedback(@PathParam("taskid") long id) {
+//        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+//        session.beginTransaction();
+//        
+//        Query q = session.createQuery("from Task where Id = " + id);
+//        Task task = (Task) q.uniqueResult();
+//        Feedback fb = task.getFeedback();
+//        
+//        session.getTransaction().commit();
+//        return fb;
+//    }
+    
     @Path("/{taskid}/feedback")
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public Feedback getFeedback(@PathParam("taskid") long id) {
-        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-        session.beginTransaction();
-        
-        Query q = session.createQuery("from Task where Id = " + id);
-        Task task = (Task) q.uniqueResult();
-        Feedback fb = task.getFeedback();
-        
-        session.getTransaction().commit();
-        return fb;
+    public FeedbackResource getFeedbackResource() {
+        return new FeedbackResource();
     }
 
 //    @Path("/populate")

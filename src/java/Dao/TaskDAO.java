@@ -93,4 +93,46 @@ public class TaskDAO {
         session.getTransaction().commit();
         return task != null;
     }
+    
+    public List<Task> getFinishedTask(String username) {
+        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+        session.beginTransaction();
+        // check if the username is the manager
+        Query q1 = session.createQuery("select isManager from User where userName = :username");
+        q1.setParameter("username", username);
+        Boolean isManager = (Boolean) q1.uniqueResult();
+        Query q;
+        // if is manager, query all tasks, otherwise get tasks of the employee 
+        if (isManager) {
+           q = session.createQuery("from Task where isDone = True");
+        } else {
+            q = session.createQuery("from Task where user.userName = :username and isDone = True");
+            q.setParameter("username", username);
+        }
+        List<Task> tasks = q.list();
+        
+        session.getTransaction().commit();
+        return tasks;
+    }
+    
+    public List<Task> getUnfinishedTask(String username) {
+        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+        session.beginTransaction();
+        // check if the username is the manager
+        Query q1 = session.createQuery("select isManager from User where userName = :username");
+        q1.setParameter("username", username);
+        Boolean isManager = (Boolean) q1.uniqueResult();
+        Query q;
+        // if is manager, query all tasks, otherwise get tasks of the employee 
+        if (isManager) {
+           q = session.createQuery("from Task where isDone = False");
+        } else {
+            q = session.createQuery("from Task where user.userName = :username and isDone = False");
+            q.setParameter("username", username);
+        }
+        List<Task> tasks = q.list();
+        
+        session.getTransaction().commit();
+        return tasks;
+    }
 }

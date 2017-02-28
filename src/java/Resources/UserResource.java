@@ -107,7 +107,7 @@ public class UserResource {
     }
     
     @Path("/{username}/tasks")
-    public TaskResource getCommentResource() {
+    public TaskResource getTaskResource() {
         return new TaskResource();
     }
 
