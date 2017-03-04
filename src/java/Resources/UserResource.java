@@ -40,8 +40,6 @@ import org.hibernate.SessionFactory;
  * @author lwown
  */
 @Path("users")
-//@Consumes(MediaType.APPLICATION_JSON)
-//@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_XML)

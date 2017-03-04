@@ -8,6 +8,9 @@ package Dao;
 import Model.Task;
 import Model.User;
 import Util.HibernateStuff;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -94,7 +97,7 @@ public class TaskDAO {
         return task != null;
     }
     
-    public List<Task> getFinishedTask(String username) {
+    public List<Task> getFinishedTasks(String username) {
         Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
         session.beginTransaction();
         // check if the username is the manager
@@ -115,7 +118,7 @@ public class TaskDAO {
         return tasks;
     }
     
-    public List<Task> getUnfinishedTask(String username) {
+    public List<Task> getUnfinishedTasks(String username) {
         Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
         session.beginTransaction();
         // check if the username is the manager
@@ -135,4 +138,40 @@ public class TaskDAO {
         session.getTransaction().commit();
         return tasks;
     }
+    
+    public List<Task> getTasksDueToday(String username) {
+        List<Task> tasks = getUnfinishedTasks(username);
+        List<Task> result = new ArrayList<>();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        Date now = new Date();
+        for (Task task : tasks) {
+            if (now.before(task.getDueDate()) && fmt.format(now).equals(fmt.format(task.getDueDate()))) {
+                result.add(task);
+            }
+        }
+        return result;
+    } 
+    
+    public List<Task> getOverdueTasks(String username) {
+        List<Task> tasks = getUnfinishedTasks(username);
+        List<Task> result = new ArrayList<>();
+        Date now = new Date();
+        for (Task task : tasks) {
+            if (now.after(task.getDueDate())) {
+                result.add(task);
+            }
+        }
+        return result;
+    } 
+    
+    public List<Task> getFinishedButNotYetApprovedTasks(String username) {
+        List<Task> tasks = getFinishedTasks(username);
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (!task.getFeedback().isIsApproved()) {
+                result.add(task);
+            }
+        }
+        return result;
+    } 
 }

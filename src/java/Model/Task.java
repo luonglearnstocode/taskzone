@@ -34,6 +34,7 @@ public class Task implements Serializable {
     @Id
     @GeneratedValue
     private Long id; 
+    private String title;
     private String text;
     private boolean isDone;
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,6 +54,7 @@ public class Task implements Serializable {
 
     public Task(String text, Date dueDate) {
         isDone = false;
+        this.title = "task title ";
         this.text = text;
         this.created = new Date();
         this.dueDate = dueDate;
@@ -133,5 +135,15 @@ public class Task implements Serializable {
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    
       
 }

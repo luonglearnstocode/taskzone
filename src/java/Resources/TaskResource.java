@@ -51,7 +51,7 @@ public class TaskResource {
     @Produces(MediaType.APPLICATION_XML)
     public List<Task> getFinishedTasks(@PathParam("username") String username) {      
         TaskDAO dao = new TaskDAO();
-        List tasks = dao.getFinishedTask(username);
+        List tasks = dao.getFinishedTasks(username);
         return tasks;
     }
     
@@ -60,7 +60,34 @@ public class TaskResource {
     @Produces(MediaType.APPLICATION_XML)
     public List<Task> getUnfinishedTasks(@PathParam("username") String username) {      
         TaskDAO dao = new TaskDAO();
-        List tasks = dao.getUnfinishedTask(username);
+        List tasks = dao.getUnfinishedTasks(username);
+        return tasks;
+    }
+    
+    @Path("/today")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Task> getTasksDueToday(@PathParam("username") String username) {      
+        TaskDAO dao = new TaskDAO();
+        List tasks = dao.getTasksDueToday(username);
+        return tasks;
+    }
+    
+    @Path("/overdue")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Task> getOverdueTasks(@PathParam("username") String username) {      
+        TaskDAO dao = new TaskDAO();
+        List tasks = dao.getOverdueTasks(username);
+        return tasks;
+    }
+    
+    @Path("/toappove")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Task> getFinishedButNotYetApprovedTasks(@PathParam("username") String username) {      
+        TaskDAO dao = new TaskDAO();
+        List tasks = dao.getFinishedButNotYetApprovedTasks(username);
         return tasks;
     }
     
