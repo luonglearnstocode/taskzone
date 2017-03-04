@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(Resources.AccessControlResponseFilter.class);
         resources.add(Resources.FeedbackResource.class);
+        resources.add(Resources.ScheduleResource.class);
         resources.add(Resources.TaskResource.class);
         resources.add(Resources.UserResource.class);
     }

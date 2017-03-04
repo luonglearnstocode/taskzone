@@ -13,6 +13,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
@@ -36,6 +37,8 @@ public class User implements Serializable {
     private boolean isManager;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
+    @ManyToMany
+    private List<Schedule> workSchedule = new ArrayList<Schedule>();
     
     public User() {}
     
@@ -91,5 +94,16 @@ public class User implements Serializable {
     public void setIsManager(boolean isManager) {
         this.isManager = isManager;
     }
+    
+    @XmlTransient
+    public List<Schedule> getWorkSchedule() {
+        return workSchedule;
+    }
+
+    public void setWorkSchedule(List<Schedule> workSchedule) {
+        this.workSchedule = workSchedule;
+    }
+    
+    
     
 }

@@ -82,7 +82,7 @@ public class TaskResource {
         return tasks;
     }
     
-    @Path("/toappove")
+    @Path("/toapprove")
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public List<Task> getFinishedButNotYetApprovedTasks(@PathParam("username") String username) {      

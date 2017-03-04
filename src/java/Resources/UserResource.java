@@ -7,6 +7,7 @@ package Resources;
 
 import Dao.UserDAO;
 import Model.Feedback;
+import Model.Schedule;
 import Model.Task;
 import Model.User;
 import Util.HibernateStuff;
@@ -52,7 +53,6 @@ public class UserResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-//    @Produces(MediaType.APPLICATION_XML)
     public Response addUser(User user) {
         UserDAO dao = new UserDAO();
         dao.addUser(user);
@@ -108,109 +108,6 @@ public class UserResource {
     public TaskResource getTaskResource() {
         return new TaskResource();
     }
-
-    
-    
-//    @GET
-//    @Produces(MediaType.APPLICATION_XML)
-////    @Produces(MediaType.APPLICATION_JSON)
-//    public List<User> getUsers() {
-//        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-//        session.beginTransaction();
-//
-//        Query q = session.createQuery("from User");
-//        List<User> users = q.list();
-//        
-//        session.getTransaction().commit();
-//        return users;
-//    }
-//    @POST
-//    @Consumes(MediaType.APPLICATION_XML)
-//    @Produces(MediaType.APPLICATION_XML)
-//    public User addUser(User user) {
-//        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-//        session.beginTransaction();
-//        
-//        session.save(user);
-//        
-//        session.getTransaction().commit();
-//        return user;
-//    }
-    
-    
-    
-    
-//    @Path("/{username}")
-//    @GET
-//    @Produces(MediaType.APPLICATION_XML)
-//    public User getUserWithUsername(@PathParam("username") String username) {
-//        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-//        session.beginTransaction();
-//        
-//        Query q = session.createQuery("from User where userName = '" + username + "'");
-//        User user = (User) q.uniqueResult();
-//        
-//        // can build a response and parse it to the exception
-//        if (user == null) {
-////            throw new WebApplicationException(Status.NOT_FOUND);
-//            throw new NotFoundException();
-//        }
-//        session.getTransaction().commit();
-//        return user;
-//    }
-    
-    
-    
-//    @Path("/{username}")
-//    @POST
-////    @Produces(MediaType.APPLICATION_XML)
-//    public User addTask(Task newTask, @PathParam("username") String username) {
-//        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-//        session.beginTransaction();
-//        
-//        Query q = session.createQuery("from User where userName = '" + username + "'");
-//        User user = (User) q.uniqueResult();
-//        user.getTasks().add(newTask);
-//        session.saveOrUpdate(newTask);
-//        session.saveOrUpdate(user);
-//        
-//        session.getTransaction().commit();
-//        return user;
-//    }
-    
-//    @Path("/{username}")
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_XML)
-//    @Produces(MediaType.APPLICATION_XML)
-//    public User updateUser(User newUser, @PathParam("username") String username) {
-//        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-//        session.beginTransaction();
-//        
-//        Query q = session.createQuery("from User where userName = '" + username + "'");
-//        User user = (User) q.uniqueResult();
-//
-//        user.setFullName(newUser.getFullName());
-//        user.setPassword(newUser.getPassword());
-//        
-//        session.saveOrUpdate(user);
-//        session.getTransaction().commit();
-//        return user;
-//    }
-    
-//    @Path("/{username}")
-//    @DELETE
-//    @Produces(MediaType.APPLICATION_XML)
-//    public User deleteUser(@PathParam("username") String username) {
-//        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
-//        session.beginTransaction();
-//        
-//        Query q = session.createQuery("from User where userName = '" + username + "'");
-//        User user = (User) q.uniqueResult();
-//
-//        session.delete(user);
-//        session.getTransaction().commit();
-//        return user;
-//    }
     
     @Path("/populate")
     @GET
@@ -220,6 +117,8 @@ public class UserResource {
         
         Session session = sf.openSession();
         session.beginTransaction();
+        Schedule s1 = new Schedule();
+        Schedule s2 = new Schedule();
         
         User u1 = new User("abc");
         User u2 = new User("def");
@@ -233,6 +132,9 @@ public class UserResource {
         Task t2 = new Task("task 2", date2);
         Task t3 = new Task("task 3", date2);
         
+        s1.setWorkDate(date1);
+        s2.setWorkDate(date2);
+        
         Feedback f1 = new Feedback("first feedback");
         f1.setIsApproved(true);
         t1.setFeedback(f1);
@@ -244,6 +146,13 @@ public class UserResource {
         t2.setUser(u1);
         t3.setUser(u2);
         u3.setIsManager(true);
+        
+        s1.getUsers().add(u1);
+        s1.getUsers().add(u2);
+        s2.getUsers().add(u3);
+        u1.getWorkSchedule().add(s1);
+        u2.getWorkSchedule().add(s1);
+        u3.getWorkSchedule().add(s2);
 //        t1.assignTask(u1);
 //        t2.assignTask(u1);
 //        t3.assignTask(u2);
@@ -255,7 +164,8 @@ public class UserResource {
         session.saveOrUpdate(u1);
         session.saveOrUpdate(u2);
         session.saveOrUpdate(u3);
-        
+        session.saveOrUpdate(s1);
+        session.saveOrUpdate(s2);
         session.getTransaction().commit();
         
         return "Done";
