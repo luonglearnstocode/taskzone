@@ -47,8 +47,12 @@ public class ScheduleDAO {
         session.beginTransaction();
         Query q = session.createQuery("from Schedule where id = " + id);
         Schedule schedule = (Schedule) q.uniqueResult();
-//        schedule.setUsers(newSchedule.getUsers());
+        schedule.setUsers(newSchedule.getUsers());
         schedule.setWorkDate(newSchedule.getWorkDate());
+        for (User user : schedule.getUsers()) {
+            user.getWorkSchedule().add(schedule);
+            session.saveOrUpdate(user);
+        }
         session.saveOrUpdate(schedule);
         session.getTransaction().commit();
         return schedule;
@@ -62,6 +66,47 @@ public class ScheduleDAO {
         session.delete(schedule);
         session.getTransaction().commit();
         return schedule != null;
+    }
+    
+    public List<Schedule> getScheduleOfUser(String username) {
+        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+        session.beginTransaction();
+        Query q = session.createQuery("from User where userName = :username");
+        q.setParameter("username", username);
+        User user = (User) q.uniqueResult();
+        List<Schedule> schedules = user.getWorkSchedule();
+        session.getTransaction().commit();
+        return schedules;
+    } 
+
+    public void addUserToSchedule(long id, String username) {
+        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+        session.beginTransaction();
+        Query q1 = session.createQuery("from User where userName = :username");
+        q1.setParameter("username", username);
+        User user = (User) q1.uniqueResult();
+        Query q2 = session.createQuery("from Schedule where id = " + id);
+        Schedule schedule = (Schedule) q2.uniqueResult();
+        user.getWorkSchedule().add(schedule);
+        schedule.getUsers().add(user);
+        session.saveOrUpdate(schedule);
+        session.saveOrUpdate(user);
+        session.getTransaction().commit();
+    }
+    
+    public void deleteUserFromSchedule(long id, String username) {
+        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+        session.beginTransaction();
+        Query q1 = session.createQuery("from User where userName = :username");
+        q1.setParameter("username", username);
+        User user = (User) q1.uniqueResult();
+        Query q2 = session.createQuery("from Schedule where id = " + id);
+        Schedule schedule = (Schedule) q2.uniqueResult();
+        user.getWorkSchedule().remove(schedule);
+        schedule.getUsers().remove(user);
+        session.saveOrUpdate(schedule);
+        session.saveOrUpdate(user);
+        session.getTransaction().commit();
     }
     
 }

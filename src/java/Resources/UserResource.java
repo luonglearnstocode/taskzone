@@ -5,6 +5,7 @@
  */
 package Resources;
 
+import Dao.ScheduleDAO;
 import Dao.UserDAO;
 import Model.Feedback;
 import Model.Schedule;
@@ -103,6 +104,32 @@ public class UserResource {
         session.getTransaction().commit();
         return user;
     }
+    
+    @Path("/{username}/schedule")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Schedule> getScheduleOfUser(@PathParam("username") String username) {
+        ScheduleDAO dao = new ScheduleDAO();
+        List schedule = dao.getScheduleOfUser(username);
+        return schedule;
+    }
+    
+    @Path("/{username}/schedule/{id}")
+    @POST
+    public Response addUserToSchedule(@PathParam("id") long id, @PathParam("username") String username) {
+        ScheduleDAO dao = new ScheduleDAO();
+        dao.addUserToSchedule(id, username);
+        return Response.ok().build();
+    } 
+    
+    @Path("/{username}/schedule/{id}")
+    @DELETE
+    public Response deleteUserFromSchedule(@PathParam("id") long id, @PathParam("username") String username) {
+        ScheduleDAO dao = new ScheduleDAO();
+        dao.deleteUserFromSchedule(id, username);
+        return Response.ok().build();
+    } 
+    
     
     @Path("/{username}/tasks")
     public TaskResource getTaskResource() {

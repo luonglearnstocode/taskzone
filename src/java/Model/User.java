@@ -37,7 +37,7 @@ public class User implements Serializable {
     private boolean isManager;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Schedule> workSchedule = new ArrayList<Schedule>();
     
     public User() {}

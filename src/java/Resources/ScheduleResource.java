@@ -71,4 +71,19 @@ public class ScheduleResource {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
     
+    @Path("/{scheduleId}/{username}")
+    @POST
+    public Response addUserToSchedule(@PathParam("scheduleId") long id, @PathParam("username") String username) {
+        ScheduleDAO dao = new ScheduleDAO();
+        dao.addUserToSchedule(id, username);
+        return Response.ok().build();
+    } 
+    
+    @Path("/{scheduleId}/{username}")
+    @DELETE
+    public Response deleteUserFromSchedule(@PathParam("id") long id, @PathParam("username") String username) {
+        ScheduleDAO dao = new ScheduleDAO();
+        dao.deleteUserFromSchedule(id, username);
+        return Response.ok().build();
+    } 
 }
