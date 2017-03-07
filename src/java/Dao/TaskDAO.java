@@ -75,6 +75,7 @@ public class TaskDAO {
         task.setDueDate(newTask.getDueDate());
         task.setIsDone(newTask.isIsDone());
         task.setText(newTask.getText());
+        task.setTitle(newTask.getTitle());
         session.saveOrUpdate(task);
         
         session.getTransaction().commit();

@@ -66,4 +66,28 @@ public class UserDAO {
         session.getTransaction().commit();
         return user != null;
     }    
+    
+    public boolean isUserAuthenticated(String username, String password, String path) {
+        Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
+        session.beginTransaction();        
+        Query q = session.createQuery("from User where userName = :username");
+        q.setParameter("username", username);
+        User user = (User) q.uniqueResult();
+//        boolean isUser = false;
+        boolean result = false;
+        if (user != null) {
+            boolean isUser = user.getPassword().equals(password);
+            if (isUser) {
+                if (!user.isIsManager()) {
+                    if (path.contains("users/"+username)) {
+                        result = true;
+                    }
+                } else {
+                    result = true;
+                }
+            }
+        }
+        session.getTransaction().commit();
+        return result;
+    }
 }
