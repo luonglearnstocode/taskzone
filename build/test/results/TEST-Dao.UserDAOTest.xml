@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="HP8560w" name="Dao.UserDAOTest" skipped="0" tests="9" time="3.857" timestamp="2017-03-13T17:38:55">
+<testsuite errors="0" failures="0" hostname="HP8560w" name="Dao.UserDAOTest" skipped="0" tests="9" time="3.921" timestamp="2017-03-13T18:40:49">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="US" />
@@ -61,7 +61,7 @@
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="ant.file.type.ProjectADM-rest-build" value="file" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner Dao.UserDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\test\results\TEST-Dao.UserDAOTest.xml crashfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junitvmwatcher6316566986150622076.properties propsfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junit6030724276763953003.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner Dao.UserDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\test\results\TEST-Dao.UserDAOTest.xml crashfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junitvmwatcher8725088858177144331.properties propsfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junit7533038072026982295.properties" />
     <property name="build.classes.dir" value="build/web/WEB-INF/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="ap.supported.internal" value="true" />
@@ -433,15 +433,15 @@
     <property name="war.ear.name" value="ProjectADM.war" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="Dao.UserDAOTest" name="testGetUsers" time="3.285" />
-  <testcase classname="Dao.UserDAOTest" name="testAddUser" time="0.055" />
-  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedWrongPassword" time="0.104" />
-  <testcase classname="Dao.UserDAOTest" name="testUpdateUser" time="0.041" />
-  <testcase classname="Dao.UserDAOTest" name="testGetUser" time="0.036" />
-  <testcase classname="Dao.UserDAOTest" name="testDeleteUser" time="0.091" />
-  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedWrongPath" time="0.033" />
-  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedWrongUsername" time="0.023" />
-  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedAllRight" time="0.042" />
+  <testcase classname="Dao.UserDAOTest" name="testGetUsers" time="3.296" />
+  <testcase classname="Dao.UserDAOTest" name="testAddUser" time="0.102" />
+  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedWrongPassword" time="0.042" />
+  <testcase classname="Dao.UserDAOTest" name="testUpdateUser" time="0.069" />
+  <testcase classname="Dao.UserDAOTest" name="testGetUser" time="0.024" />
+  <testcase classname="Dao.UserDAOTest" name="testDeleteUser" time="0.095" />
+  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedWrongPath" time="0.022" />
+  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedWrongUsername" time="0.02" />
+  <testcase classname="Dao.UserDAOTest" name="testIsUserAuthenticatedAllRight" time="0.14" />
   <system-out><![CDATA[
     alter table Task 
         drop 
@@ -651,57 +651,57 @@ Hibernate: select user0_.userName as userName1_3_, user0_.fullName as fullName2_
 Hibernate: select workschedu0_.users_userName as users_us1_3_0_, workschedu0_.workSchedule_id as workSche2_4_0_, schedule1_.id as id1_1_1_, schedule1_.workDate as workDate2_1_1_ from USER_DETAILS_Schedule workschedu0_ inner join Schedule schedule1_ on workschedu0_.workSchedule_id=schedule1_.id where workschedu0_.users_userName=?
 Hibernate: select tasks0_.USERNAME as USERNAME8_3_0_, tasks0_.id as id1_2_0_, tasks0_.id as id1_2_1_, tasks0_.created as created2_2_1_, tasks0_.dueDate as dueDate3_2_1_, tasks0_.feedback_id as feedback7_2_1_, tasks0_.isDone as isDone4_2_1_, tasks0_.text as text5_2_1_, tasks0_.title as title6_2_1_, tasks0_.USERNAME as USERNAME8_2_1_, feedback1_.id as id1_0_2_, feedback1_.isApproved as isApprov2_0_2_, feedback1_.message as message3_0_2_ from Task tasks0_ left outer join Feedback feedback1_ on tasks0_.feedback_id=feedback1_.id where tasks0_.USERNAME=?
 ]]></system-out>
-  <system-err><![CDATA[Mar 13, 2017 7:38:55 PM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+  <system-err><![CDATA[Mar 13, 2017 8:40:49 PM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
 INFO: HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
-Mar 13, 2017 7:38:55 PM org.hibernate.Version logVersion
+Mar 13, 2017 8:40:49 PM org.hibernate.Version logVersion
 INFO: HHH000412: Hibernate Core {4.3.1.Final}
-Mar 13, 2017 7:38:55 PM org.hibernate.cfg.Environment <clinit>
+Mar 13, 2017 8:40:49 PM org.hibernate.cfg.Environment <clinit>
 INFO: HHH000206: hibernate.properties not found
-Mar 13, 2017 7:38:55 PM org.hibernate.cfg.Environment buildBytecodeProvider
+Mar 13, 2017 8:40:49 PM org.hibernate.cfg.Environment buildBytecodeProvider
 INFO: HHH000021: Bytecode provider name : javassist
-Mar 13, 2017 7:38:55 PM org.hibernate.cfg.Configuration configure
+Mar 13, 2017 8:40:49 PM org.hibernate.cfg.Configuration configure
 INFO: HHH000043: Configuring from resource: /hibernate.cfg.xml
-Mar 13, 2017 7:38:55 PM org.hibernate.cfg.Configuration getConfigurationInputStream
+Mar 13, 2017 8:40:49 PM org.hibernate.cfg.Configuration getConfigurationInputStream
 INFO: HHH000040: Configuration resource: /hibernate.cfg.xml
-Mar 13, 2017 7:38:55 PM org.hibernate.internal.util.xml.DTDEntityResolver resolveEntity
+Mar 13, 2017 8:40:49 PM org.hibernate.internal.util.xml.DTDEntityResolver resolveEntity
 WARN: HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
-Mar 13, 2017 7:38:55 PM org.hibernate.cfg.Configuration doConfigure
+Mar 13, 2017 8:40:49 PM org.hibernate.cfg.Configuration doConfigure
 INFO: HHH000041: Configured SessionFactory: null
-Mar 13, 2017 7:38:55 PM org.hibernate.dialect.Dialect <init>
+Mar 13, 2017 8:40:49 PM org.hibernate.dialect.Dialect <init>
 INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-Mar 13, 2017 7:38:56 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
+Mar 13, 2017 8:40:49 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
 INFO: HHH000227: Running hbm2ddl schema export
-Mar 13, 2017 7:38:56 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:49 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 WARN: HHH000402: Using Hibernate built-in connection pool (not for production use!)
-Mar 13, 2017 7:38:56 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:50 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/project]
-Mar 13, 2017 7:38:56 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:50 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000046: Connection properties: {user=root, password=****}
-Mar 13, 2017 7:38:56 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:50 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000006: Autocommit mode: false
-Mar 13, 2017 7:38:56 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:50 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
-Mar 13, 2017 7:38:57 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+Mar 13, 2017 8:40:51 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
 INFO: HHH000030: Cleaning up connection pool [jdbc:mysql://localhost:3306/project]
-Mar 13, 2017 7:38:57 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
+Mar 13, 2017 8:40:51 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
 INFO: HHH000230: Schema export complete
-Mar 13, 2017 7:38:57 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:51 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 WARN: HHH000402: Using Hibernate built-in connection pool (not for production use!)
-Mar 13, 2017 7:38:57 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:51 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/project]
-Mar 13, 2017 7:38:57 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:51 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000046: Connection properties: {user=root, password=****}
-Mar 13, 2017 7:38:57 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:51 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000006: Autocommit mode: false
-Mar 13, 2017 7:38:57 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:51 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
-Mar 13, 2017 7:38:57 PM org.hibernate.dialect.Dialect <init>
+Mar 13, 2017 8:40:51 PM org.hibernate.dialect.Dialect <init>
 INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-Mar 13, 2017 7:38:57 PM org.hibernate.engine.transaction.internal.TransactionFactoryInitiator initiateService
+Mar 13, 2017 8:40:51 PM org.hibernate.engine.transaction.internal.TransactionFactoryInitiator initiateService
 INFO: HHH000399: Using default transaction strategy (direct JDBC transactions)
-Mar 13, 2017 7:38:57 PM org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory <init>
+Mar 13, 2017 8:40:51 PM org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory <init>
 INFO: HHH000397: Using ASTQueryTranslatorFactory
-Mar 13, 2017 7:38:57 PM org.hibernate.validator.internal.util.Version <clinit>
+Mar 13, 2017 8:40:51 PM org.hibernate.validator.internal.util.Version <clinit>
 INFO: HV000001: Hibernate Validator 5.1.2.Final
 ]]></system-err>
 </testsuite>

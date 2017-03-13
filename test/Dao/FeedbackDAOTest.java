@@ -7,7 +7,6 @@ package Dao;
 
 import Model.Feedback;
 import Model.Task;
-import Model.User;
 import Util.HibernateStuff;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

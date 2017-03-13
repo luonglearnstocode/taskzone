@@ -31,10 +31,7 @@ public class TaskDAOTest {
     public void initialize() throws ParseException {
         Session session = HibernateStuff.getInstance().getSessionFactory().openSession();
         session.beginTransaction();
-//        Query q = session.createQuery("delete from Task");
-//        q.executeUpdate();
-//        q = session.createQuery("delete from User");
-//        q.executeUpdate();
+
         session.createSQLQuery("SET FOREIGN_KEY_CHECKS = 0").executeUpdate();
         session.createSQLQuery("truncate table Task").executeUpdate();
         session.createSQLQuery("truncate table USER_DETAILS").executeUpdate();

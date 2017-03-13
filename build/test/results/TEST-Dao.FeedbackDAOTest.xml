@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="HP8560w" name="Dao.TaskDAOTest" skipped="0" tests="17" time="6.054" timestamp="2017-03-13T18:40:41">
+<testsuite errors="0" failures="0" hostname="HP8560w" name="Dao.FeedbackDAOTest" skipped="0" tests="4" time="4.477" timestamp="2017-03-13T18:40:28">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="US" />
@@ -61,7 +61,7 @@
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="ant.file.type.ProjectADM-rest-build" value="file" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner Dao.TaskDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\test\results\TEST-Dao.TaskDAOTest.xml crashfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junitvmwatcher9202864329823199567.properties propsfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junit4848533887654926222.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner Dao.FeedbackDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\test\results\TEST-Dao.FeedbackDAOTest.xml crashfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junitvmwatcher6896884373178244023.properties propsfile=C:\Users\lwown\Dropbox\metro\2ndyear\spring\java\ProjectADM\build\junit4112085896282686796.properties" />
     <property name="build.classes.dir" value="build/web/WEB-INF/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="ap.supported.internal" value="true" />
@@ -433,23 +433,10 @@
     <property name="war.ear.name" value="ProjectADM.war" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="Dao.TaskDAOTest" name="testGetFinishedButNotYetApprovedTasksManager" time="3.303" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetTaskWithId" time="0.178" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetOverdueTasksNotManager" time="0.161" />
-  <testcase classname="Dao.TaskDAOTest" name="testAddTask" time="0.177" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetOverdueTasksManager" time="0.197" />
-  <testcase classname="Dao.TaskDAOTest" name="testUpdateTask" time="0.24" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetFinishedTasksManager" time="0.166" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetTasksDueTodayNotManager" time="0.131" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetTasksManager" time="0.17" />
-  <testcase classname="Dao.TaskDAOTest" name="testDeleteTask" time="0.205" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetUnfinishedTasksManager" time="0.203" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetFinishedButNotYetApprovedTasks2" time="0.127" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetFinishedTasksNotManager" time="0.131" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetTasksNotManager" time="0.109" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetUnfinishedTasksNotManager" time="0.126" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetFinishedButNotYetApprovedTasks" time="0.123" />
-  <testcase classname="Dao.TaskDAOTest" name="testGetTasksDueTodayManager" time="0.12" />
+  <testcase classname="Dao.FeedbackDAOTest" name="testGetFeedBack2" time="3.97" />
+  <testcase classname="Dao.FeedbackDAOTest" name="testUpdateFeedback1" time="0.155" />
+  <testcase classname="Dao.FeedbackDAOTest" name="testUpdateFeedback2" time="0.119" />
+  <testcase classname="Dao.FeedbackDAOTest" name="testGetFeedBack" time="0.116" />
   <system-out><![CDATA[
     alter table Task 
         drop 
@@ -535,521 +522,115 @@
         foreign key (users_userName) 
         references USER_DETAILS (userName)
 Hibernate: SET FOREIGN_KEY_CHECKS = 0
+Hibernate: truncate table Feedback
 Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
+Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-getFinishedButNotYetApprovedTasksManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.isDone=1
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-getTaskWithId
+getFeedBack2
 Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where Id=1
 Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
 Hibernate: SET FOREIGN_KEY_CHECKS = 0
+Hibernate: truncate table Feedback
 Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
+Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetOverdueTasksNotManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=? and task0_.isDone=0
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-addTask
-Hibernate: select user0_.userName as userName1_3_, user0_.fullName as fullName2_3_, user0_.isManager as isManage3_3_, user0_.password as password4_3_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select workschedu0_.users_userName as users_us1_3_0_, workschedu0_.workSchedule_id as workSche2_4_0_, schedule1_.id as id1_1_1_, schedule1_.workDate as workDate2_1_1_ from USER_DETAILS_Schedule workschedu0_ inner join Schedule schedule1_ on workschedu0_.workSchedule_id=schedule1_.id where workschedu0_.users_userName=?
-Hibernate: select tasks0_.USERNAME as USERNAME8_3_0_, tasks0_.id as id1_2_0_, tasks0_.id as id1_2_1_, tasks0_.created as created2_2_1_, tasks0_.dueDate as dueDate3_2_1_, tasks0_.feedback_id as feedback7_2_1_, tasks0_.isDone as isDone4_2_1_, tasks0_.text as text5_2_1_, tasks0_.title as title6_2_1_, tasks0_.USERNAME as USERNAME8_2_1_, feedback1_.id as id1_0_2_, feedback1_.isApproved as isApprov2_0_2_, feedback1_.message as message3_0_2_ from Task tasks0_ left outer join Feedback feedback1_ on tasks0_.feedback_id=feedback1_.id where tasks0_.USERNAME=?
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetOverdueTasksManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.isDone=0
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-updateTask
+updateFeedback1
 Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where Id=1
 Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
+Hibernate: update Feedback set isApproved=?, message=? where id=?
 Hibernate: SET FOREIGN_KEY_CHECKS = 0
+Hibernate: truncate table Feedback
 Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
+Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetFinishedTasksManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.isDone=1
+updateFeedback2
+Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where Id=2
 Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
+Hibernate: update Feedback set isApproved=?, message=? where id=?
 Hibernate: SET FOREIGN_KEY_CHECKS = 0
+Hibernate: truncate table Feedback
 Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
+Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
 Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetTasksDueTodayNotManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=? and task0_.isDone=0
+getFeedBack1
+Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where Id=2
 Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetTasksManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-deleteTask
-Hibernate: select user0_.userName as userName1_3_, user0_.fullName as fullName2_3_, user0_.isManager as isManage3_3_, user0_.password as password4_3_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select workschedu0_.users_userName as users_us1_3_0_, workschedu0_.workSchedule_id as workSche2_4_0_, schedule1_.id as id1_1_1_, schedule1_.workDate as workDate2_1_1_ from USER_DETAILS_Schedule workschedu0_ inner join Schedule schedule1_ on workschedu0_.workSchedule_id=schedule1_.id where workschedu0_.users_userName=?
-Hibernate: select tasks0_.USERNAME as USERNAME8_3_0_, tasks0_.id as id1_2_0_, tasks0_.id as id1_2_1_, tasks0_.created as created2_2_1_, tasks0_.dueDate as dueDate3_2_1_, tasks0_.feedback_id as feedback7_2_1_, tasks0_.isDone as isDone4_2_1_, tasks0_.text as text5_2_1_, tasks0_.title as title6_2_1_, tasks0_.USERNAME as USERNAME8_2_1_, feedback1_.id as id1_0_2_, feedback1_.isApproved as isApprov2_0_2_, feedback1_.message as message3_0_2_ from Task tasks0_ left outer join Feedback feedback1_ on tasks0_.feedback_id=feedback1_.id where tasks0_.USERNAME=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.id=1
-Hibernate: delete from Task where id=?
-Hibernate: delete from Feedback where id=?
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetUnfinishedTasksManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.isDone=0
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-getFinishedButNotYetApprovedTasks2
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=? and task0_.isDone=1
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetFinishedTasksNotManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=? and task0_.isDone=1
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetTasksNotManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetUnfinishedTasksNotManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=? and task0_.isDone=0
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-getFinishedButNotYetApprovedTasks
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.USERNAME=? and task0_.isDone=1
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: SET FOREIGN_KEY_CHECKS = 0
-Hibernate: truncate table Task
-Hibernate: truncate table USER_DETAILS
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into Feedback (isApproved, message) values (?, ?)
-Hibernate: insert into Task (created, dueDate, feedback_id, isDone, text, title, USERNAME) values (?, ?, ?, ?, ?, ?, ?)
-Hibernate: select user_.userName, user_.fullName as fullName2_3_, user_.isManager as isManage3_3_, user_.password as password4_3_ from USER_DETAILS user_ where user_.userName=?
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: insert into USER_DETAILS (fullName, isManager, password, userName) values (?, ?, ?, ?)
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-Hibernate: update Task set created=?, dueDate=?, feedback_id=?, isDone=?, text=?, title=?, USERNAME=? where id=?
-testGetTasksDueTodayManager
-Hibernate: select user0_.isManager as col_0_0_ from USER_DETAILS user0_ where user0_.userName=?
-Hibernate: select task0_.id as id1_2_, task0_.created as created2_2_, task0_.dueDate as dueDate3_2_, task0_.feedback_id as feedback7_2_, task0_.isDone as isDone4_2_, task0_.text as text5_2_, task0_.title as title6_2_, task0_.USERNAME as USERNAME8_2_ from Task task0_ where task0_.isDone=0
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
-Hibernate: select feedback0_.id as id1_0_0_, feedback0_.isApproved as isApprov2_0_0_, feedback0_.message as message3_0_0_ from Feedback feedback0_ where feedback0_.id=?
-Hibernate: select user0_.userName as userName1_3_0_, user0_.fullName as fullName2_3_0_, user0_.isManager as isManage3_3_0_, user0_.password as password4_3_0_, tasks1_.USERNAME as USERNAME8_3_1_, tasks1_.id as id1_2_1_, tasks1_.id as id1_2_2_, tasks1_.created as created2_2_2_, tasks1_.dueDate as dueDate3_2_2_, tasks1_.feedback_id as feedback7_2_2_, tasks1_.isDone as isDone4_2_2_, tasks1_.text as text5_2_2_, tasks1_.title as title6_2_2_, tasks1_.USERNAME as USERNAME8_2_2_, feedback2_.id as id1_0_3_, feedback2_.isApproved as isApprov2_0_3_, feedback2_.message as message3_0_3_, workschedu3_.users_userName as users_us1_3_4_, schedule4_.id as workSche2_4_4_, schedule4_.id as id1_1_5_, schedule4_.workDate as workDate2_1_5_ from USER_DETAILS user0_ left outer join Task tasks1_ on user0_.userName=tasks1_.USERNAME left outer join Feedback feedback2_ on tasks1_.feedback_id=feedback2_.id left outer join USER_DETAILS_Schedule workschedu3_ on user0_.userName=workschedu3_.users_userName left outer join Schedule schedule4_ on workschedu3_.workSchedule_id=schedule4_.id where user0_.userName=?
 ]]></system-out>
-  <system-err><![CDATA[Mar 13, 2017 8:40:42 PM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+  <system-err><![CDATA[Mar 13, 2017 8:40:28 PM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
 INFO: HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
-Mar 13, 2017 8:40:42 PM org.hibernate.Version logVersion
+Mar 13, 2017 8:40:28 PM org.hibernate.Version logVersion
 INFO: HHH000412: Hibernate Core {4.3.1.Final}
-Mar 13, 2017 8:40:42 PM org.hibernate.cfg.Environment <clinit>
+Mar 13, 2017 8:40:28 PM org.hibernate.cfg.Environment <clinit>
 INFO: HHH000206: hibernate.properties not found
-Mar 13, 2017 8:40:42 PM org.hibernate.cfg.Environment buildBytecodeProvider
+Mar 13, 2017 8:40:28 PM org.hibernate.cfg.Environment buildBytecodeProvider
 INFO: HHH000021: Bytecode provider name : javassist
-Mar 13, 2017 8:40:42 PM org.hibernate.cfg.Configuration configure
+Mar 13, 2017 8:40:28 PM org.hibernate.cfg.Configuration configure
 INFO: HHH000043: Configuring from resource: /hibernate.cfg.xml
-Mar 13, 2017 8:40:42 PM org.hibernate.cfg.Configuration getConfigurationInputStream
+Mar 13, 2017 8:40:28 PM org.hibernate.cfg.Configuration getConfigurationInputStream
 INFO: HHH000040: Configuration resource: /hibernate.cfg.xml
-Mar 13, 2017 8:40:42 PM org.hibernate.internal.util.xml.DTDEntityResolver resolveEntity
+Mar 13, 2017 8:40:28 PM org.hibernate.internal.util.xml.DTDEntityResolver resolveEntity
 WARN: HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
-Mar 13, 2017 8:40:42 PM org.hibernate.cfg.Configuration doConfigure
+Mar 13, 2017 8:40:28 PM org.hibernate.cfg.Configuration doConfigure
 INFO: HHH000041: Configured SessionFactory: null
-Mar 13, 2017 8:40:42 PM org.hibernate.dialect.Dialect <init>
+Mar 13, 2017 8:40:28 PM org.hibernate.dialect.Dialect <init>
 INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-Mar 13, 2017 8:40:42 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
+Mar 13, 2017 8:40:28 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
 INFO: HHH000227: Running hbm2ddl schema export
-Mar 13, 2017 8:40:42 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:29 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 WARN: HHH000402: Using Hibernate built-in connection pool (not for production use!)
-Mar 13, 2017 8:40:42 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:29 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/project]
-Mar 13, 2017 8:40:42 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:29 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000046: Connection properties: {user=root, password=****}
-Mar 13, 2017 8:40:42 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:29 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000006: Autocommit mode: false
-Mar 13, 2017 8:40:42 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:29 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
-Mar 13, 2017 8:40:43 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+Mar 13, 2017 8:40:30 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
 INFO: HHH000030: Cleaning up connection pool [jdbc:mysql://localhost:3306/project]
-Mar 13, 2017 8:40:43 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
+Mar 13, 2017 8:40:30 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
 INFO: HHH000230: Schema export complete
-Mar 13, 2017 8:40:43 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:30 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 WARN: HHH000402: Using Hibernate built-in connection pool (not for production use!)
-Mar 13, 2017 8:40:43 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:30 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/project]
-Mar 13, 2017 8:40:43 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:30 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000046: Connection properties: {user=root, password=****}
-Mar 13, 2017 8:40:43 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Mar 13, 2017 8:40:30 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH000006: Autocommit mode: false
-Mar 13, 2017 8:40:43 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Mar 13, 2017 8:40:30 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
-Mar 13, 2017 8:40:43 PM org.hibernate.dialect.Dialect <init>
+Mar 13, 2017 8:40:30 PM org.hibernate.dialect.Dialect <init>
 INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-Mar 13, 2017 8:40:43 PM org.hibernate.engine.transaction.internal.TransactionFactoryInitiator initiateService
+Mar 13, 2017 8:40:30 PM org.hibernate.engine.transaction.internal.TransactionFactoryInitiator initiateService
 INFO: HHH000399: Using default transaction strategy (direct JDBC transactions)
-Mar 13, 2017 8:40:43 PM org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory <init>
+Mar 13, 2017 8:40:30 PM org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory <init>
 INFO: HHH000397: Using ASTQueryTranslatorFactory
-Mar 13, 2017 8:40:43 PM org.hibernate.validator.internal.util.Version <clinit>
+Mar 13, 2017 8:40:30 PM org.hibernate.validator.internal.util.Version <clinit>
 INFO: HV000001: Hibernate Validator 5.1.2.Final
 ]]></system-err>
 </testsuite>
