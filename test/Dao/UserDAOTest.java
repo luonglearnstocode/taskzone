@@ -147,7 +147,7 @@ public class UserDAOTest {
     @Test
     public void testIsUserAuthenticatedWrongPath() {
         System.out.println("testIsUserAuthenticatedWrongPath");
-        String username = "abcd";
+        String username = "abc";
         String password = "qwerty";
         String path = ".../users/def/tasks";
         UserDAO instance = new UserDAO();
